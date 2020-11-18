@@ -50,6 +50,20 @@
                   </VBox>
                </content>
             </TitledPane>
+            <TitledPane prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                     <children>
+                        <RadioButton fx:id="circleRadioButton" mnemonicParsing="false" onAction="#shapeRadioButtonSelected" selected="true" text="Circle">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="shapeToggleGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rectangleRadioButton" mnemonicParsing="false" onAction="#shapeRadioButtonSelected" text="Rectangle" toggleGroup="$shapeToggleGroup" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
             <Button fx:id="undoButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#undoButtonPressed" text="Undo" />
             <Button fx:id="clearButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
          </children>
