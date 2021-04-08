@@ -34,7 +34,7 @@ public class PainterController extends PainterControls{
     @FXML
     void shapeRadioButtonSelected(ActionEvent event){
         currentShape = (PenShape) shapeToggleGroup.getSelectedToggle().getUserData();
-	System.out.println(currentShape);
+	    System.out.println(currentShape);
     }
 
     @FXML
@@ -55,9 +55,9 @@ public class PainterController extends PainterControls{
     @FXML
     void undoButtonPressed(ActionEvent event) {
         final ObservableList<Node> itemsInDrawingAreaPane = drawingAreaPane.getChildren();
-	final int noOfItems = itemsInDrawingAreaPane.size(); 
+	    final int noOfItems = itemsInDrawingAreaPane.size(); 
 
-	if(noOfItems > 0) { itemsInDrawingAreaPane.remove(noOfItems - 1); }
+	    if(noOfItems > 0) { itemsInDrawingAreaPane.remove(noOfItems - 1); }
     }
 
     @FXML
@@ -67,73 +67,84 @@ public class PainterController extends PainterControls{
     
     private static Shape getShape(final MouseEvent event, final PenShape shape){
 
-	final double xAxisPosition = event.getX();
-	final double yAxisPosition = event.getY();
+	    final double xAxisPosition = event.getX();
+	    final double yAxisPosition = event.getY();
         final int lineSize      = penRadius.getRadius();
 
         return switch(shape) {
 	           case RECTANGLE -> getRectangle(
-					       lineSize,
-					       lineSize,
-		                               xAxisPosition,
-					       yAxisPosition,
-					       brushColor
-					       ); 
-		   case CIRCLE -> getCircle(xAxisPosition, yAxisPosition, lineSize, brushColor);
-	       };
+					                          lineSize,
+					                          lineSize,
+		                                      xAxisPosition,
+					                          yAxisPosition,
+					                          brushColor
+					                         ); 
+	     	   case CIRCLE -> getCircle(
+                                         xAxisPosition, 
+                                         yAxisPosition, 
+                                         lineSize, 
+                                         brushColor
+                                        );
+	           };
 
     }
 
     private static Shape getRectangle(final int height, 
                                       final int width, 
                                       final double xAxisPosition, 
-				      final double yAxisPosition,
-				      final Paint paint){
-        final Rectangle rectangle = new Rectangle(height, width, paint);
-	rectangle .setStrokeLineCap(StrokeLineCap.ROUND);
-        rectangle .setX(xAxisPosition);
-	rectangle .setY(yAxisPosition);
+				                      final double yAxisPosition,
+				                      final Paint paint
+                                    ){
 
-	return rectangle;
+        final Rectangle rectangle = new Rectangle(height, width, paint);
+
+	    rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
+        rectangle.setX(xAxisPosition);
+	    rectangle.setY(yAxisPosition);
+
+	    return rectangle;
     }
 
     private static Shape getCircle(
                                    final double xAxisPosition,
-				   final double yAxisPosition,
-				   final int    radius,
-				   final Paint  paint
-				   ){
+				                   final double yAxisPosition,
+				                   final int    radius,
+				                   final Paint  paint
+				                  ){
         return new Circle(xAxisPosition, yAxisPosition, radius, paint);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
 
-        blackRadioButton      .setUserData(Color.BLACK);
-	redRadioButton        .setUserData(Color.RED);
-	greenRadioButton      .setUserData(Color.GREEN);
-	blueRadioButton       .setUserData(Color.BLUE);
+        blackRadioButton.setUserData(Color.BLACK);
+	    blueRadioButton.setUserData(Color.BLUE);
+	    greenRadioButton.setUserData(Color.GREEN);
+	    redRadioButton.setUserData(Color.RED);
 
-	smallRadioButton      .setUserData(PenRadius.SMALL);
-	mediumRadioButton     .setUserData(PenRadius.MEDIUM);
-	largeRadioButton      .setUserData(PenRadius.LARGE);
+	    largeRadioButton.setUserData(PenRadius.LARGE);
+	    mediumRadioButton.setUserData(PenRadius.MEDIUM);
+	    smallRadioButton.setUserData(PenRadius.SMALL);
         
-	circleRadioButton     .setUserData(PenShape.CIRCLE);
-	rectangleRadioButton  .setUserData(PenShape.RECTANGLE);
+	    circleRadioButton.setUserData(PenShape.CIRCLE);
+	    rectangleRadioButton.setUserData(PenShape.RECTANGLE);
     }
     
     private enum PenRadius{
-        SMALL(2), MEDIUM(4), LARGE(6);
 
-	private final int radius;
+        SMALL(2), 
+        MEDIUM(4), 
+        LARGE(6);
 
-	private PenRadius(final int radius){ 
-	    this.radius = radius; 
-	}
+	    private final int radius;
 
-	public int getRadius() { 
-	    return this.radius; 
-	}
+	    private PenRadius(final int radius){ 
+	        this.radius = radius; 
+	    }
+
+	    public int getRadius() { 
+	        return this.radius; 
+	    }
     }
 
     private enum PenShape{

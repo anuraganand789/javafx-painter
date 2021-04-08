@@ -15,21 +15,22 @@ public class Painter extends Application{
     @Override
     public void start(final Stage stage) throws MalformedURLException, IOException{
         final Properties fxmlProperties = new Properties(); 
-	fxmlProperties.load(new FileReader("painter.properties"));
+	    fxmlProperties.load(new FileReader("painter.properties"));
 
-	final String fxmlLocation = new StringBuilder(100)
-	.append("file://")
-	.append(fxmlProperties.getProperty("home"))
-	.append(fxmlProperties.getProperty("project folder"))
-	.append(fxmlProperties.getProperty("fxml folder"))
-	.append(fxmlProperties.getProperty("painter fxml"))
-	.toString();
+	    final String fxmlLocation = 
+        new StringBuilder(100)
+	    .append("file://")
+	    .append(fxmlProperties.getProperty("home"))
+	    .append(fxmlProperties.getProperty("project folder"))
+	    .append(fxmlProperties.getProperty("fxml folder"))
+	    .append(fxmlProperties.getProperty("painter fxml"))
+	    .toString();
 
-	System.out.println("fxmlLocation " + fxmlLocation);
+	    System.out.println("fxmlLocation " + fxmlLocation);
 
-	stage.setScene(new Scene(FXMLLoader.load(new URL(fxmlLocation))));
-	stage.setTitle("Painter");
-	stage.show();
+	    stage.setScene(new Scene(FXMLLoader.load(new URL(fxmlLocation))));
+	    stage.setTitle("Painter");
+	    stage.show();
     }
 
     public static void main(final String ... args) throws MalformedURLException, IOException{
